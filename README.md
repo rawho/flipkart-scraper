@@ -1,6 +1,15 @@
 # Flipkart-scraper
 This is python program wrote inorder to scrap the product details from flipkart and thus you can compare product easily by sorting on various aspects
 
+Are you Worried of cloning and running commands !!!
+
+Then run it on Repl
+
+[![Run on Repl.it](https://repl.it/badge/github/rawho/flipkart-scraper)](https://repl.it/github/rawho/flipkart-scraper)
+
+
+If you try it in your local machine then follow the steps below,
+
 ## Installation
 * First clone this repo by typing <br>
 `git clone https://github.com/rawho/flipkart-scraper.git`<br><br>
