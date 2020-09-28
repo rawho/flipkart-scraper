@@ -99,7 +99,7 @@ def details(page_soup):
     
             print('==========================')
 
-            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + '\n')
+            f.write(f'{name.replace(',','|')},{price.replace(',','').replace('₹','')},{rating},{no_ratings.replace(',','').replace('(','').replace(')','')}\n')
 
 ###########################################################################################################            
 
@@ -150,7 +150,7 @@ def details2(page_soup):
         
             print('=========================================================')
             
-            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + '\n')
+            f.write(f'{name.replace(',','|')},{price.replace(',','').replace('₹','')},{rating},{no_ratings.replace(',','').replace('(','').replace(')','')}\n')
 
         except:
             continue
@@ -186,16 +186,8 @@ while True:
         if aa == 'n':
             filename = create_file()
             if is_file_already_present(filename): continue
-            header_()
-            oh_yeah()
-            break
-        else:
-            header_()
-            oh_yeah()
-            break
-    else:
-        header_()
-        oh_yeah()
-        break
+    header_()
+    oh_yeah()
+    break
 
 ################################################################################
