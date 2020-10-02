@@ -159,6 +159,7 @@ def details2(page_soup):
 
 def oh_yeah():
     
+    my_url = f'https://www.flipkart.com/search?q={my_product}&otracker=search&otracker1=search&marketplace=FLIPKART&as-show=on&as=off'
     page_soup = requesting(my_url)
 
     #takings the links of all the page
@@ -178,7 +179,7 @@ def oh_yeah():
 ########################## MAIN #############################################
 
 banner()
-my_url = input('Enter the flipcart url : ')
+my_product = input('Enter the flipcart product : ')
 filename = create_file()
 while True:
     if is_file_already_present(filename):
