@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as soup
 import requests
 import os 
 
-####################################################################################
+##################################################################################
 
 def banner():
     print(r'''
@@ -20,8 +20,8 @@ def banner():
 
 #checking whether the file is already present
 def is_file_already_present(filename):
-    lst = os.listdir()
-    return filename in lst 
+    lstt = os.listdir()
+    return filename in lstt 
 
 #####################################################################################
 
