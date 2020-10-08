@@ -20,8 +20,8 @@ def banner():
 
 #checking whether the file is already present
 def is_file_already_present(filename):
-    lstt = os.listdir()
-    return filename in lstt 
+    lst = os.listdir()
+    return filename in lst 
 
 #####################################################################################
 
