@@ -4,7 +4,7 @@ from bs4 import BeautifulSoup as soup
 import requests
 import os 
 
-####################################################################################
+##################################################################################
 
 def banner():
     print(r'''
@@ -148,7 +148,7 @@ def details2(page_soup):
                     print('NO:OF RATINGS : ' + no_ratings)
 
         
-            print('=========================================================')
+            print('==========================================================')
             
             f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + '\n')
 
@@ -176,7 +176,7 @@ def oh_yeah():
         except:
             details2(soup1)
 
-########################## MAIN #############################################
+########################## MAIN ###########################################
 
 banner()
 my_product = input('Enter the flipcart product : ')
