@@ -1,4 +1,6 @@
-
+#!/usr/bin/env python3
+#^bang, enables the user to type just ./flipkart-scrap.py
+#################################################################################
 # import the libraries
 from bs4 import BeautifulSoup as soup
 import requests
