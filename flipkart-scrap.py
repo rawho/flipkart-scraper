@@ -39,7 +39,7 @@ def create_file():
 def header_():
     global f
     f = open(filename, 'w')
-    header = 'NAME, PRICE, RATING, NO:OF RATING \n'
+    header = 'NAME, PRICE, RATING, NO:OF RATING, NO:OF REVIEW \n'
     f.write(header)
 
 ############################################################################
@@ -97,11 +97,26 @@ def details(page_soup):
                 except: 
                     no_rating = no_ratings1.split()
                     no_ratings = no_rating[0]
-                    print('NO:OF RATINGS : ' + no_ratings)   
-    
+                    print('NO:OF RATINGS : ' + no_ratings)  
+                     
+            #no:of ratings
+            no_reviews_container = i.find('span', {'class':'_38sUEc'})
+            if no_reviews_container is None: 
+                no_reviews = 'NA'
+                print('NO:OF RATINGS : ' + no_ratings)
+            else:
+                no_reviews1 = no_reviews_container.text
+                try:
+                    no_review = no_reviews1.split('&').split()
+                    no_reviews = no_rating[3] #3(+1 but counting starts from 0) becouse most products return ['68', 'Ratings', '&', '5', 'Reviews'], where five is the 4th element
+                    print('NO:OF REVIEWS : ' + no_reviews)
+                except: 
+                    no_review = no_reviews1.split()
+                    no_reviews = no_rating[3]
+                    print('NO:OF REVIEWS : ' + no_reviews)   
             print('==========================')
 
-            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + '\n')
+            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + ',' + no_reviews.replace(',','').replace('(','').replace(')','') + '\n')
 
 ###########################################################################################################            
 
@@ -137,22 +152,27 @@ def details2(page_soup):
             no_ratings_container = container.find('span', {'class': '_38sUEc'}).span.span
             if no_ratings_container is None:
                 no_ratings = 'NA'
+                no_reviews = 'NA'
                 print('NO:OF RATINGS : ' + no_ratings)
             else:
                 no_ratings1 = no_ratings_container.text.strip()
                 try:
                     no_rating = no_ratings1.split('&').split()
                     no_ratings = no_rating[0]
+                    no_reviews = no_rating[3] #3(+1 but counting starts from 0) becouse most products return ['68', 'Ratings', '&', '5', 'Reviews'], where five is the 4th element
                     print('NO:OF RATINGS : ' + no_ratings)
+                    print('NO:OF REVIEWS : ' + no_ratings)
                 except:
                     no_rating = no_ratings1.split()
                     no_ratings = no_rating[0]
+                    no_reviews = no_rating[3]
                     print('NO:OF RATINGS : ' + no_ratings)
+                    print('NO:OF REVIEWS : ' + no_ratings)
 
         
             print('==========================================================')
             
-            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + '\n')
+            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + no_reviews.replace(',','').replace('(','').replace(')','') + '\n')
 
         except:
             continue
