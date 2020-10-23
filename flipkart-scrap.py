@@ -5,7 +5,10 @@
 from bs4 import BeautifulSoup as soup
 import requests
 import os 
+import matplotlib.pyplot as plt
 
+names = []
+prices = []
 ##################################################################################
 
 def banner():
@@ -64,6 +67,7 @@ def details(page_soup):
             #product name
             name = i.div.div.img['alt']
             print('PRODUCT NAME : ', name)
+            names.append(name)
     
             #product price
             price_container = i.find('div', {'class':'_1vC4OE'})
@@ -73,6 +77,7 @@ def details(page_soup):
             else:
                 price = price_container.text.strip()
                 print('PRODUCT PRICE : ', price)
+            prices.append(price)
             
             #rating
             rating_container = i.find('div', {'class':'hGSR34'})
@@ -115,22 +120,23 @@ def details(page_soup):
                     no_reviews = no_rating[3]
                     print('NO:OF REVIEWS : ' + no_reviews)   
             print('==========================')
+            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + ',' + no_reviews.replace(',','').replace('(','').replace(')','') + '\n')   
 
-            f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + ',' + no_reviews.replace(',','').replace('(','').replace(')','') + '\n')
 
 ###########################################################################################################            
 
 #scraping the details of product in another way
 def details2(page_soup):
     global f
-    
     containers = page_soup.find_all('div', {'class':'bhgxx2 col-12-12'})
+
     for container in containers:
         try:
             name_container = container.find('div', {'class':'_3wU53n'})
             if name_container is None : continue
             name = name_container.text.strip()
             print('PRODUCT NAME : ' + name)
+            names.append(name)
                 
             price_container = container.find('div',{'class':'_1vC4OE _2rQ-NK'})
             if price_container is None: 
@@ -140,6 +146,7 @@ def details2(page_soup):
                 price1 = price_container.text.strip()
                 price = price1.replace(',','') 
                 print('PRODUCT PRICE : ' + price)
+            prices.append(price)
                 
             rating_container = container.find('div', {'class':'hGSR34'})
             if rating_container is None: 
@@ -168,12 +175,9 @@ def details2(page_soup):
                     no_reviews = no_rating[3]
                     print('NO:OF RATINGS : ' + no_ratings)
                     print('NO:OF REVIEWS : ' + no_ratings)
-
-        
             print('==========================================================')
             
             f.write(name.replace(',','|') + ',' + price.replace(',','').replace('₹','') + ',' + rating + ',' + no_ratings.replace(',','').replace('(','').replace(')','') + no_reviews.replace(',','').replace('(','').replace(')','') + '\n')
-
         except:
             continue
 
@@ -187,7 +191,7 @@ def oh_yeah():
     #takings the links of all the page
     page_container = page_soup.find_all('a','_2Xp0TH')
 
-        #looping through the each page
+    #looping through the each page
     for page in page_container:
         url1 = 'https://www.flipkart.com'
         url2 = page.get('href')
@@ -197,6 +201,17 @@ def oh_yeah():
             details(soup1)
         except:
             details2(soup1)
+    print(names)
+    print(prices)
+
+#########################################################################################
+
+def plot(filename):
+    filename = filename.split('.', 1)[0]
+    plt.barh(names, prices)
+    plt.xticks(rotation=90)
+    plt.savefig(filename + '.png')
+    #plt.show()
 
 ########################## MAIN ###########################################
 
@@ -211,14 +226,17 @@ while True:
             if is_file_already_present(filename): continue
             header_()
             oh_yeah()
+            plot(filename)
             break
         else:
             header_()
             oh_yeah()
+            plot(filename)
             break
     else:
         header_()
         oh_yeah()
+        plot(filename)
         break
 
 ################################################################################
