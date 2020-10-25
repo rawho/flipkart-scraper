@@ -208,7 +208,21 @@ def oh_yeah():
 
 def plot(filename):
     filename = filename.split('.', 1)[0]
-    plt.barh(names, prices)
+
+    #converting prices from string to int for sorting
+    newprices = [i[1:] for i in prices]
+    newprices1 = [i.replace(',','') for i in newprices]
+    intprices = [int(i) for i in newprices1]
+
+    #sorting according to prices
+    sort_prices, sort_names = zip(*sorted(zip(intprices, names)))
+    
+    #plotting
+    plt.barh(sort_names, sort_prices)
+    #to show price value for each bar
+    for i, v in enumerate(sort_prices):
+        plt.text(v, i, " "+str(v), color='blue', va='center', fontweight='bold')
+    plt.yticks(fontsize = 6, wrap = True)
     plt.xticks(rotation=90)
     plt.savefig(filename + '.png')
     #plt.show()
