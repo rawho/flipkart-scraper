@@ -20,8 +20,7 @@ just run `python3 flipkart-scrap.py`
  
 - [x] Here you have to type the url, i think that is not good, change it from url to the name of the product (added by [tligier](https://github.com/tligier))
  
-- [x] Any graph or any visualization about the products, Which will tell us the best product to buy, based on price, ratings and something (added by [
-sakshi-s](https://github.com/sakshi-s)) - Some improvements required
+- [x] Any graph or any visualization about the products, Which will tell us the best product to buy, based on price, ratings and something (added by [sakshi-s](https://github.com/sakshi-s)) 
  
  ------
  **If you are willing, You can contribute to this project....**
